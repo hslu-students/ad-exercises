@@ -1,0 +1,14 @@
+@startuml
+
+class List {
+  -start: ListElement
+  +add()
+  +remove()
+}
+
+class ListElement {
+  -prev: ListElement
+  -next: ListElement
+}
+
+@enduml

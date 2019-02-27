@@ -1,16 +1,22 @@
 @startuml
 
 ' associations
-CustomList -- Node: start
+CustomList -- Node: head
+CustomListIterator -- Node: current
 Node -- Node: prev
 Node -- Node: next
 
 ' class definitions
-class CustomList <<Iterator>> {
+class CustomList <<Iterable>> {
   -head: Node
-  -index: Integer
+  -size: Int
   +add(element: Object)
   +remove()
+  +iterator(): CustomListIterator
+}
+
+class CustomListIterator <<Iterator>> {
+  -current: Node
   +hasNext(): Object
   +next(): Object
 }

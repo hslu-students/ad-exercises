@@ -25,6 +25,28 @@ public class CustomList implements Iterable {
   }
 
   /**
+   * Returns whether a element is inside a list
+   */
+  public boolean contains(final Object element) {
+    for (Object o : this) {
+      if (element == o) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Gets the last object and returns it
+   */
+  public Object pop() {
+    final Node node = head;
+    head = node.next;
+    head.prev = null;
+    return node.element;
+  }
+
+  /**
    * Returns the size of the list
    */
   public int size() {

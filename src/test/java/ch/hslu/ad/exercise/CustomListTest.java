@@ -12,20 +12,20 @@ class CustomListTest {
 
     @Test
     void testListInitialization() {
-        CustomList list = new CustomList();
+        final CustomList list = new CustomList();
         assertTrue(list != null);
     }
 
     @Test
     void testAddingOfElement() {
-        CustomList list = new CustomList();
+        final CustomList list = new CustomList();
         list.add(new Allocation(0, 0));
         assertTrue(list.size() == 1);
     }
 
     @Test
     void testAddingOfTwoElements() {
-        CustomList list = new CustomList();
+        final CustomList list = new CustomList();
         list.add(new Allocation(0, 0));
         list.add(new Allocation(0, 0));
         assertTrue(list.size() == 2);
@@ -33,7 +33,7 @@ class CustomListTest {
 
     @Test
     void testIterationCount() {
-        CustomList list = new CustomList();
+        final CustomList list = new CustomList();
         list.add(new Allocation(0, 0));
         list.add(new Allocation(0, 0));
         int size = 0;
@@ -45,9 +45,9 @@ class CustomListTest {
 
     @Test
     void testIterationElements() {
-        CustomList list = new CustomList();
-        var o0 = new Allocation(0, 0);
-        var o1 = new Allocation(1, 0);
+        final CustomList list = new CustomList();
+        final var o0 = new Allocation(0, 0);
+        final var o1 = new Allocation(1, 0);
         list.add(o0);
         list.add(o1);
         int count = 0;
@@ -61,5 +61,34 @@ class CustomListTest {
             count++;
         }
         assertTrue(count == 2);
+    }
+
+    @Test
+    void testFindUnexpeced() {
+        final CustomList list = new CustomList();
+        final boolean found = list.contains(new Allocation(1,1));
+        assertTrue(found == false);
+    }
+
+    @Test
+    void testFindExpected() {
+        final CustomList list = new CustomList();
+        final var o0 = new Allocation(0, 0);
+        final var o1 = new Allocation(1, 0);
+        list.add(o0);
+        list.add(o1);
+        boolean contains = list.contains(o0);
+        assertTrue(contains);
+    }
+
+    @Test
+    void testPop() {
+        final CustomList list = new CustomList();
+        final var o0 = new Allocation(0, 0);
+        final var o1 = new Allocation(1, 0);
+        list.add(o0);
+        list.add(o1);
+        Object o = list.pop();
+        assertEquals(o, o1);
     }
 }

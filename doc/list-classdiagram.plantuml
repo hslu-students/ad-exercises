@@ -10,8 +10,10 @@ Node -- Node: next
 class CustomList <<Iterable>> {
   -head: Node
   -size: Int
+  +find(element: Object)
   +add(element: Object)
   +remove()
+  +pop(): Object
   +iterator(): CustomListIterator
 }
 

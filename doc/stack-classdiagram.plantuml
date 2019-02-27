@@ -1,0 +1,11 @@
+@startuml
+
+' class definitions
+class Stack {
+  -stack: String[100]
+  -index: Int
+  +push(element: String)
+  +pop(): String
+}
+
+@enduml

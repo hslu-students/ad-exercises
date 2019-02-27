@@ -54,7 +54,20 @@ public class CustomList implements Iterable {
   }
 
   public void remove(Object element) {
-    // TODO
+   Node currentNode = head;
+    while(currentNode != null) {
+      if (currentNode.element == element) {
+        if (currentNode.prev != null) {
+          currentNode.prev.next = currentNode.next;
+        }
+        currentNode.next = null;
+        if (currentNode.next != null) {
+          currentNode.next.prev = currentNode.prev;
+        }
+        currentNode.prev = null;
+      }
+      currentNode = currentNode.next;
+    }
   }
 
   class Node {

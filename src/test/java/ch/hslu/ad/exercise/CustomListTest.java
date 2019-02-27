@@ -91,4 +91,19 @@ class CustomListTest {
         Object o = list.pop();
         assertEquals(o, o1);
     }
+
+    @Test
+    void testRemoval() {
+        final CustomList list = new CustomList();
+        final var o0 = new Allocation(0, 0);
+        final var o1 = new Allocation(1, 0);
+        list.add(o0);
+        list.add(o1);
+        list.remove(o1);
+        int size = 0;
+        for (Object o : list) {
+            size++;
+        }
+        assertEquals(size, 1);
+    }
 }

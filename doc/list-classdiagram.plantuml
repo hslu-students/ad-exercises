@@ -1,14 +1,24 @@
 @startuml
 
-class List {
-  -start: ListElement
-  +add()
+' associations
+CustomList -- Node: start
+Node -- Node: prev
+Node -- Node: next
+
+' class definitions
+class CustomList <<Iterator>> {
+  -head: Node
+  -index: Integer
+  +add(element: Object)
   +remove()
+  +hasNext(): Object
+  +next(): Object
 }
 
-class ListElement {
-  -prev: ListElement
-  -next: ListElement
+class Node {
+  -prev: Node
+  -next: Node
+  -element: Object
 }
 
 @enduml

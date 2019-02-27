@@ -1,0 +1,15 @@
+@startuml
+
+' class definitions
+class Queue {
+  -length: 8
+  -queue: Char[length]
+  -head: Int
+  -tail: Int
+  -size: Int
+  +isFull(): Boolean
+  +put(element: Char)
+  +get(): Char
+}
+
+@enduml

@@ -4,6 +4,7 @@
 class Stack {
   -stack: String[100]
   -index: Int
+  +isFull(): Boolean
   +push(element: String)
   +pop(): String
 }

@@ -26,4 +26,15 @@ class QueueTest {
         assertTrue(queue.get() == 'i');
         assertTrue(queue.get() == ' ');
     }
+
+    @Test
+    void testQueuePrint() {
+        final Queue queue = new Queue();
+        queue.put('h');
+        queue.put('o');
+        queue.put('o');
+        queue.put('i');
+        queue.toString();
+        assertTrue(queue.get() == 'h');
+    }
 }

@@ -1,5 +1,6 @@
 package ch.hslu.ad.exercise;
 
+import java.util.Arrays;
 
 public class Queue {
   private int length = 8;
@@ -32,5 +33,9 @@ public class Queue {
       size--;
     } 
     return element;
+  }
+
+  public String toString() {
+    return Arrays.toString(queue);
   }
 }

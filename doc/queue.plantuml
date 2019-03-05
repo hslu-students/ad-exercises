@@ -1,5 +1,9 @@
 @startuml
 
+' style
+skinparam Handwritten true
+skinparam monochrome true
+
 ' class definitions
 class Queue {
   -length: 8

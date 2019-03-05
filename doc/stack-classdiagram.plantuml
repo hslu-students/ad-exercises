@@ -1,5 +1,9 @@
 @startuml
 
+' style
+skinparam Handwritten true
+skinparam monochrome true
+
 ' class definitions
 class Stack {
   -stack: String[100]

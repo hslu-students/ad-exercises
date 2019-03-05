@@ -1,5 +1,9 @@
 @startuml
 
+' style
+skinparam Handwritten true
+skinparam monochrome true
+
 ' associations
 CustomList -- Node: head
 CustomListIterator -- Node: current

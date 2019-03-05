@@ -54,7 +54,7 @@ public class CustomList implements Iterable {
   }
 
   public void remove(Object element) {
-   Node currentNode = head;
+    Node currentNode = head;
     while(currentNode != null) {
       if (currentNode.element == element) {
         if (currentNode.prev != null) {
@@ -65,6 +65,7 @@ public class CustomList implements Iterable {
           currentNode.next.prev = currentNode.prev;
         }
         currentNode.prev = null;
+        size--;
       }
       currentNode = currentNode.next;
     }

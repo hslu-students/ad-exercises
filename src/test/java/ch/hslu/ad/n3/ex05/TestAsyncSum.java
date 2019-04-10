@@ -10,9 +10,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+
+import org.junit.jupiter.api.BeforeAll;;
+import org.junit.jupiter.api.Test;;
 
 /**
  * FIXME this test, or the NumberRangeConsumer, respectively, is broken.
@@ -22,14 +26,14 @@ public class TestAsyncSum {
     private static final int N_PRODUCERS = 2;
     private static final int MAX_RANGE = 1000;
 
-    private List<NumberRangeProducer> producers;
-    private NumberRangeConsumer consumer;
+    private static List<NumberRangeProducer> producers;
+    private static NumberRangeConsumer consumer;
 
-    private List<Future<Long>> producerFutures;
-    private Future<Long> consumerFuture;
+    private static List<Future<Long>> producerFutures;
+    private static Future<Long> consumerFuture;
 
-    @Before
-    public void initProducerConsumer() {
+    @BeforeAll
+    public static void initProducerConsumer() {
         Random random = new Random(System.currentTimeMillis());
         BlockingQueue<Integer> numbers = new ArrayBlockingQueue<>(MAX_RANGE * N_PRODUCERS);
         producers = new ArrayList<>(N_PRODUCERS);
@@ -53,15 +57,15 @@ public class TestAsyncSum {
                 producerSum += future.get();
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
-                Assert.fail(e.getMessage());
+                fail(e.getMessage());
             }
         }
         long consumerSum = 0;
         try {
             consumerSum = consumerFuture.get();
         } catch (InterruptedException | ExecutionException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
-        Assert.assertEquals(producerSum, consumerSum);
+        assertEquals(producerSum, consumerSum);
     }
 }

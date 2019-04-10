@@ -4,9 +4,14 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+
+import org.junit.jupiter.api.BeforeAll;;
+import org.junit.jupiter.api.Test;;
 
 public class ProofUnsafeCounterBroken {
 
@@ -18,7 +23,7 @@ public class ProofUnsafeCounterBroken {
     private int init;
     private long increments = 0;
 
-    @Before
+    @BeforeAll
     public void init() {
         Random random = new Random(System.currentTimeMillis());
         init = random.nextInt(Integer.MAX_VALUE);
@@ -38,9 +43,9 @@ public class ProofUnsafeCounterBroken {
             Thread.sleep(DURATION_IN_SECS * 1_000);
             counter.interrupt();
         } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
-        Assert.assertEquals(init + increments, unsynchronizedCounter.get());
+        assertEquals(init + increments, unsynchronizedCounter.get());
     }
 
     @Test
@@ -60,7 +65,7 @@ public class ProofUnsafeCounterBroken {
         System.out.println(String.format("%10d expected", init + increments));
         System.out.println(String.format("%10d but was", unsynchronizedCounter.get()));
 
-        Assert.assertNotEquals(init + increments, unsynchronizedCounter.get());
+        assertNotEquals(init + increments, unsynchronizedCounter.get());
     }
 
 }

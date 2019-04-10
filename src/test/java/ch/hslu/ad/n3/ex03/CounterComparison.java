@@ -5,9 +5,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.BeforeAll;;
+import org.junit.jupiter.api.Test;;
 
 public class CounterComparison {
 
@@ -19,7 +22,7 @@ public class CounterComparison {
     private Counter atomicCounter;
     private Counter synchronizedCounter;
 
-    @Before
+    @BeforeAll
     public void init() {
         Random random = new Random(System.currentTimeMillis());
         init = random.nextInt(Integer.MAX_VALUE);
@@ -29,8 +32,8 @@ public class CounterComparison {
 
     @Test
     public void testInit() {
-        Assert.assertEquals(init, atomicCounter.get());
-        Assert.assertEquals(init, synchronizedCounter.get());
+        assertEquals(init, atomicCounter.get());
+        assertEquals(init, synchronizedCounter.get());
     }
 
     @Test
@@ -51,15 +54,15 @@ public class CounterComparison {
         try {
             counting.awaitTermination(DURATION_IN_SECS, TimeUnit.SECONDS);
             System.out.println(String.format("%10d (init testIncrement())", init));
-            Assert.assertTrue(atomicCounter.get() > init);
-            Assert.assertTrue(synchronizedCounter.get() > init);
-            Assert.assertTrue(atomicCounter.get() > synchronizedCounter.get());
+            assertTrue(atomicCounter.get() > init);
+            assertTrue(synchronizedCounter.get() > init);
+            assertTrue(atomicCounter.get() > synchronizedCounter.get());
             System.out.println(String.format("%10d (atomic)", atomicCounter.get()));
             System.out.println(String.format("%10d (synchronized)", synchronizedCounter.get()));
             float ratio = (float) atomicCounter.get() / synchronizedCounter.get();
             System.out.println(String.format("%.2f ratio (atomic/synchronized)", ratio));
         } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -85,15 +88,15 @@ public class CounterComparison {
         try {
             counting.awaitTermination(DURATION_IN_SECS, TimeUnit.SECONDS);
             System.out.println(String.format("%10d (init testIncIncDec())", init));
-            Assert.assertTrue(atomicCounter.get() > init);
-            Assert.assertTrue(synchronizedCounter.get() > init);
-            Assert.assertTrue(atomicCounter.get() > synchronizedCounter.get());
+            assertTrue(atomicCounter.get() > init);
+            assertTrue(synchronizedCounter.get() > init);
+            assertTrue(atomicCounter.get() > synchronizedCounter.get());
             System.out.println(String.format("%10d (atomic)", atomicCounter.get()));
             System.out.println(String.format("%10d (synchronized)", synchronizedCounter.get()));
             float ratio = (float) atomicCounter.get() / synchronizedCounter.get();
             System.out.println(String.format("%.2f ratio (atomic/synchronized)", ratio));
         } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 }

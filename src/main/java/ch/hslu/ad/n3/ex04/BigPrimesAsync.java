@@ -25,21 +25,7 @@ public class BigPrimesAsync {
     private static final Logger LOG = LogManager.getLogger();
 
     public static void main(String args[]) {
-        // findPrimesAndWriteToFile();
         findPrimesAndLog();
-    }
-
-    public static void findPrimesAndWriteToFile() {
-        File outputFile = new File(System.getProperty("user.home") + File.separator + "primes.txt");
-        try {
-            long start = System.currentTimeMillis();
-            findBigPrimes(N_PRIMES, outputFile);
-            long end = System.currentTimeMillis();
-            LOG.debug(String.format("found %d big prime numbers in %.2f seconds and wrote them to %s", N_PRIMES,
-                    (float) (end - start) / 1000, outputFile.getAbsolutePath()));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     public static void findPrimesAndLog() {
@@ -54,40 +40,6 @@ public class BigPrimesAsync {
                     (float) (end - start) / 1000));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-        }
-    }
-
-    /**
-     * finds primes and outputs them to the output file given
-     */
-    public static void findBigPrimes(final int nPrimes, File outputTo) throws Exception {
-        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
-        Queue<BigInteger> resultQueue = new ArrayBlockingQueue<>(nPrimes);
-        for (int n = 0; n < nPrimes; n++) {
-            executorService.submit(new BigPrimeFinder(resultQueue));
-        }
-        int found = 0;
-
-        OutputStreamWriter writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(outputTo)));
-        try {
-            while (found < nPrimes) {
-                BigInteger prime = resultQueue.poll();
-                if (prime != null) {
-                    writer.write(prime.toString() + "\n");
-                    found++;
-                } else {
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        throw new Exception(e);
-                    }
-                }
-            }
-            executorService.shutdown();
-        } catch (IOException ioEx) {
-            throw new Exception(ioEx);
-        } finally {
-            writer.close();
         }
     }
 

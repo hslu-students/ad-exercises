@@ -6,18 +6,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class BlockingQueueTest {
 
     private static final int CAPACITY = 1_000_000;
 
-    private Queue<String> queue;
+    private static Queue<String> queue;
 
-    @Before
-    public void initQueue() {
+    @BeforeAll
+    public static void initQueue() {
         queue = new ArrayBlockingQueue<>(CAPACITY);
     }
 
@@ -45,10 +49,10 @@ public class BlockingQueueTest {
         try {
             executor.awaitTermination(1, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
-        Assert.assertEquals(0, queue.size());
-        Assert.assertTrue(queue.isEmpty());
+        assertEquals(0, queue.size());
+        assertTrue(queue.isEmpty());
     }
 
     private Runnable createProducer(int itemsToProduce, int producerNumber) {
@@ -65,7 +69,7 @@ public class BlockingQueueTest {
             while (n > 0) {
                 String str = queue.poll();
                 if (str != null) {
-                    Assert.assertNotNull(str);
+                    assertNotNull(str);
                     n--;
                 }
             }

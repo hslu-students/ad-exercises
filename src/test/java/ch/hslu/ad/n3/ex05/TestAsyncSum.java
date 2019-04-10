@@ -47,7 +47,6 @@ public class TestAsyncSum {
     @Test
     public void testSameEndResult() {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1);
-        consumerFuture = executor.submit(consumer);
         for (NumberRangeProducer producer : producers) {
             producerFutures.add(executor.submit(producer));
         }
@@ -60,6 +59,7 @@ public class TestAsyncSum {
                 fail(e.getMessage());
             }
         }
+        consumerFuture = executor.submit(consumer);
         long consumerSum = 0;
         try {
             consumerSum = consumerFuture.get();

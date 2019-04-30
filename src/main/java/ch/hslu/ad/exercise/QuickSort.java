@@ -1,5 +1,7 @@
 package ch.hslu.ad.exercise;
 
+import java.util.Arrays;
+
 public class QuickSort {
   /**
   * Vertauscht zwei bestimmte Zeichen im Array.

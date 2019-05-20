@@ -1,0 +1,24 @@
+@startuml
+
+' style
+skinparam Handwritten true
+skinparam monochrome true
+
+[*] --> Z0
+Z0 --> Z1: E
+Z0 --> Z0: !E
+Z1 --> Z2: I
+Z1 --> Z0: !I
+Z2 --> Z3: S
+Z2 --> Z0: !S
+Z3 --> Z4: B
+Z3 --> Z0: !B
+Z4 --> Z5: E
+Z4 --> Z0: !E
+Z5 --> Z6: I
+Z5 --> Z0: !I
+Z6 --> Z7: N
+Z6 --> Z2: !N
+Z7 --> [*]
+
+@enduml

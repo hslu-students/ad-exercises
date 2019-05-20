@@ -1,5 +1,8 @@
 package ch.hslu.ad.exercise.search;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OptimizedSearch {
     public static boolean search(final String text) {
@@ -26,10 +29,22 @@ public class OptimizedSearch {
         for (int i = 0; i < m; i++) {
             shift[p.charAt(i)] = m - i;
         }
+        // optimal mismatch
+        // frequency from wikipedia https://en.wikipedia.org/wiki/Letter_frequency
+        // cheated a bit because we only search for 'you' (bad jokes intended)
+
+        // Do this shit becaus f*** java! https://stackoverflow.com/a/34055302
+        List<Character> lookup = "yuo".chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+        var mapping = new int[p.length()];
+        for (int i = 0; i < p.length(); i++) {
+            mapping[i] = lookup.indexOf(p.toCharArray()[i]);
+        }
+
         int i = 0; // index to string
         int j = 0; // index to pattern p
         do {
-            if (a.charAt(i + j) == p.charAt(j)) { // match
+            int k = mapping[j]; // instead of searching in order, search for the mapped first
+            if (a.charAt(i + k) == p.charAt(k)) { // match
                 j++;
             } else { // mismatch
                 if ((i + m) < n) { // a.charAt(i1+m) is not outside a

@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class OptimizedSearch {
     public static boolean search(final String text) {
-        ANANASSearchState state = ANANASSearchState.Z0;
+        ANANASSearchState state = ANANASSearchState.Start;
         for(char c : text.toCharArray()) {
             state = state.next(c);
-            if (state == ANANASSearchState.Z6) {
+            if (state == ANANASSearchState.End) {
                 return true;
             }
         }
@@ -40,7 +40,7 @@ public class OptimizedSearch {
             mapping[i] = lookup.indexOf(p.toCharArray()[i]);
         }
 
-        int i = 0; // index to string
+        int i = 0; // index to string   
         int j = 0; // index to pattern p
         do {
             int k = mapping[j]; // instead of searching in order, search for the mapped first

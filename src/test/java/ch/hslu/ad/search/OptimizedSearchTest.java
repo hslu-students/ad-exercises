@@ -12,8 +12,32 @@ import ch.hslu.ad.exercise.search.OptimizedSearch;
 class OptimizedSearchTest {
 
     @Test
-    void testSearch() {
+    void testSearchANANAS() {
         final boolean found = OptimizedSearch.search("ANANAS");
+        assertTrue(found);
+    }
+
+    @Test
+    void testSearchANANASNotFound() {
+        final boolean found = OptimizedSearch.search("BANANA");
+        assertTrue(!found);
+    }
+
+    @Test
+    void testSearchANANASLongString() {
+        final boolean found = OptimizedSearch.search("NANANANANANANANANAS BATMAAAAN!!");
+        assertTrue(found);
+    }
+
+    @Test
+    void testSearchANANASPadding() {
+        final boolean found = OptimizedSearch.search("ASDFANANASASDF");
+        assertTrue(found);
+    }
+
+    @Test
+    void testSearchANANASPaddingAN() {
+        final boolean found = OptimizedSearch.search("ANANANAS");
         assertTrue(found);
     }
 

@@ -2,13 +2,13 @@ package ch.hslu.ad.exercise.search;
 
 
 public enum ANANASSearchState {
-    Z0 {
+    Start {
         @Override
         public ANANASSearchState next(char n) {
             if (n == 'A') {
                 return ANANASSearchState.Z1;
             } else {
-                return Z0;
+                return Start;
             }
         }
     },
@@ -18,7 +18,7 @@ public enum ANANASSearchState {
 			if (n == 'N') {
                 return Z2;
             } else {
-                return Z0;
+                return Start;
             }
 		}
     },
@@ -28,7 +28,7 @@ public enum ANANASSearchState {
 			if (n == 'A') {
                 return Z3;
             } else {
-                return Z0;
+                return Start;
             }
 		}
     },
@@ -38,7 +38,7 @@ public enum ANANASSearchState {
 			if (n == 'N') {
                 return Z4;
             } else {
-                return Z0;
+                return Start;
             }
 		}
     },
@@ -48,7 +48,7 @@ public enum ANANASSearchState {
 			if (n == 'A') {
                 return Z5;
             } else {
-                return Z0;
+                return Start;
             }
 		}
     },
@@ -56,16 +56,16 @@ public enum ANANASSearchState {
 		@Override
 		public ANANASSearchState next(char n) {
 			if (n == 'S') {
-                return Z6;
+                return End;
             } else {
-                return Z0;
+                return Z4;
             }
 		}
     },
-    Z6 {
+    End {
 		@Override
 		public ANANASSearchState next(char n) {
-			return Z0;
+			return Start;
 		}
     };
 

@@ -1,7 +1,14 @@
 package ch.hslu.ad.exercise.search;
 
 
-public enum ANANASSearchState {
+interface SearchState {
+    public abstract SearchState next(char n);
+    public default boolean found() {
+        return false;
+    }
+}
+
+public enum ANANASSearchState implements SearchState {
     Start {
         @Override
         public ANANASSearchState next(char n) {
@@ -66,8 +73,10 @@ public enum ANANASSearchState {
 		@Override
 		public ANANASSearchState next(char n) {
 			return Start;
-		}
+        }
+        @Override
+        public boolean found() {
+            return true;
+        }
     };
-
-    public abstract ANANASSearchState next(char n);
 }

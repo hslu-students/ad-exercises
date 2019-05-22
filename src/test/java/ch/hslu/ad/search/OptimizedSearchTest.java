@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import ch.hslu.ad.exercise.search.ANANASSearchState;
 import ch.hslu.ad.exercise.search.OptimizedSearch;
 
 
@@ -13,31 +14,31 @@ class OptimizedSearchTest {
 
     @Test
     void testSearchANANAS() {
-        final boolean found = OptimizedSearch.search("ANANAS");
+        final boolean found = OptimizedSearch.search("ANANAS", ANANASSearchState.Start);
         assertTrue(found);
     }
 
     @Test
     void testSearchANANASNotFound() {
-        final boolean found = OptimizedSearch.search("BANANA");
+        final boolean found = OptimizedSearch.search("BANANA", ANANASSearchState.Start);
         assertTrue(!found);
     }
 
     @Test
     void testSearchANANASLongString() {
-        final boolean found = OptimizedSearch.search("NANANANANANANANANAS BATMAAAAN!!");
+        final boolean found = OptimizedSearch.search("NANANANANANANANANAS BATMAAAAN!!", ANANASSearchState.Start);
         assertTrue(found);
     }
 
     @Test
     void testSearchANANASPadding() {
-        final boolean found = OptimizedSearch.search("ASDFANANASASDF");
+        final boolean found = OptimizedSearch.search("ASDFANANASASDF", ANANASSearchState.Start);
         assertTrue(found);
     }
 
     @Test
     void testSearchANANASPaddingAN() {
-        final boolean found = OptimizedSearch.search("ANANANAS");
+        final boolean found = OptimizedSearch.search("ANANANAS", ANANASSearchState.Start);
         assertTrue(found);
     }
 

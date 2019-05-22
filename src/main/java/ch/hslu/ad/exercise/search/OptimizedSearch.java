@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OptimizedSearch {
-    public static boolean search(final String text) {
-        ANANASSearchState state = ANANASSearchState.Start;
+    public static boolean search(final String text, SearchState state) {
         for(char c : text.toCharArray()) {
             state = state.next(c);
-            if (state == ANANASSearchState.End) {
+            if (state.found()) {
                 return true;
             }
         }

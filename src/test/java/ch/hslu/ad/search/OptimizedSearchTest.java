@@ -52,6 +52,15 @@ class OptimizedSearchTest {
     }
 
     @Test
+    void testQuickSearchYxx() {
+        final int found = OptimizedSearch.quickSearch(
+            "yxx",
+            "you"
+        );
+        assertTrue(found == -1);
+    }
+
+    @Test
     void testQuickSearchNotFound() {
         final int found = OptimizedSearch.quickSearch(
             "Who am I searching for?!!",

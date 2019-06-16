@@ -1,5 +1,7 @@
 package ch.hslu.ad.exercise;
 
+import java.util.List;
+
 public class BinaryTree<T> {
   private Node root;
 
@@ -19,7 +21,20 @@ public class BinaryTree<T> {
     return root.search(value);
   }
 
-  private class Node {
+
+  public List<Object> traverse(BinaryTreeTraversal strategy) {
+    return strategy.traverse(root);
+  }
+
+  /**
+   * Simulate default param strategy
+   * @return List of found nodes
+   */
+  public List<Object> traverse() {
+    return traverse(new PreorderTraversal());
+  }
+
+  public class Node {
     Node left;
     Node right;
     T value;

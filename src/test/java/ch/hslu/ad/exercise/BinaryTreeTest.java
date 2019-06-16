@@ -1,6 +1,10 @@
 package ch.hslu.ad.exercise;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +46,16 @@ class BinaryTreeTest {
         }
         
         assertTrue(tree.search(1));
+    }
+
+    @Test
+    void testPreorder() {
+        final var tree = new BinaryTree<Integer>();
+        tree.add(2);
+        tree.add(3);
+        tree.add(1);
+        var result = tree.traverse();
+        System.out.println(result);
+        assertEquals(((List<Integer>)(List<?>)result), Arrays.asList(1, 3, 2));
     }
 }

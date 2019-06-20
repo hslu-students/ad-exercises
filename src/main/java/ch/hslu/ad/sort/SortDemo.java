@@ -10,10 +10,14 @@ public class SortDemo {
 
     public static void main(String[] args) {
 
-        final Sort<Integer> sort = new InsertSort<>();
-        List<Integer> data = Arrays.asList(1,3,4,6,0,2,7,8,5,9);
-        data = sort.sort(data);
-        System.out.println(data);
-
+        Arrays.asList(
+            new InsertSort<Integer>(),
+            new BubbleSort<Integer>()
+        ).forEach((sort) -> {
+            System.out.printf("SORT USING [%s]", sort.getClass());
+            System.out.println(sort.sort(
+                Arrays.asList(1,3,4,6,0,2,7,8,5,9)
+            ));
+        });
     }
 }

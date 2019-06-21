@@ -13,7 +13,8 @@ public class SortDemo {
         Arrays.asList(
             new InsertSort<Integer>(),
             new BubbleSort<Integer>(),
-            new QuickSort<Integer>()
+            new QuickSort<Integer>(),
+            new MergeSort<Integer>()
         ).forEach((sort) -> {
 
             long start = System.currentTimeMillis();

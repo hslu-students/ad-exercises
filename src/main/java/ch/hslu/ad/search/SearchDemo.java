@@ -10,7 +10,8 @@ public class SearchDemo {
     public static void main(String[] args) {
 
         Arrays.asList(
-            new OptimisedSearch()
+            new OptimisedSearch(),
+            new QuickSearch()
         ).forEach((search) -> {
             long start = System.currentTimeMillis();
 
